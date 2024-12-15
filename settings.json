@@ -1,0 +1,40 @@
+{
+  "notebook.formatOnSave.enabled": true,
+  "notebook.codeActionsOnSave": {
+    "notebook.source.fixAll": "explicit",
+    "notebook.source.organizeImports": "explicit"
+  },
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
+    }
+  },
+  "ruff.lint.select": ["ALL"],
+  "ruff.showNotifications": "onError",
+  "ruff.lint.extendSelect": ["ALL"],
+  "ruff.lint.ignore": [
+    "FBT001",
+    "PLR0913",
+    "TCH003",
+    "TCH001",
+    "TCH002",
+    "SLF001",
+    "FA102",
+    "FA100",
+    "PTH",
+    "FBT002",
+    "D205"
+    // "D401",
+    // "COM812",
+    // "TRY400",
+    // "ANN401",
+    // "E501",
+    // "D100",
+    // "N803",
+    // "B008",
+    // "ERA001"
+  ]
+}
