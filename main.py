@@ -17,8 +17,6 @@ from utils.features import name_conversion, value_mappings
 
 app = Flask(__name__)
 CORS(app)
-# Customizing cors
-# CORS(app, resources={r"/process": {"origins": "http://example.com"}})
 
 
 @app.route("/")
