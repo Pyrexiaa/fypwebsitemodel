@@ -5,9 +5,9 @@ import torch
 from catboost import CatBoostClassifier, CatBoostRegressor, Pool
 import numpy as np
 
-from model_architecture import FNNClassifierTri3
-from model_paths import IMPUTATION_MODELS, NEURAL_NETWORK, SCALING_CSV
-from features import name_conversion
+from utils.model_architecture import FNNClassifierTri3
+from utils.model_paths import IMPUTATION_MODELS, NEURAL_NETWORK, SCALING_CSV
+from utils.features import name_conversion
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 PROBABILITY_THRESHOLD = 0.6

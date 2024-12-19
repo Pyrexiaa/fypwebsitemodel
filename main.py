@@ -1,19 +1,19 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-from model_paths import (
+from utils.model_paths import (
     BINARY_FEATURES,
     IMPUTATION_MODELS,
     MULTICLASS_FEATURES,
     REGRESSION_FEATURES,
 )
-from utils import (
+from utils.utils import (
     binary_classification,
     get_scale_values,
     impute,
     postprocess_imputed_data,
 )
-from features import name_conversion, value_mappings
+from utils.features import name_conversion, value_mappings
 
 app = Flask(__name__)
 CORS(app)
