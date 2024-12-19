@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 
 from utils.features import name_conversion, value_mappings
@@ -23,7 +23,7 @@ CORS(app)
 
 @app.route("/")
 def hello() -> dict[str, str]:
-    return {"message": "Hello World"}
+    return render_template("index.html")
 
 
 @app.route("/impute", methods=["POST"])
