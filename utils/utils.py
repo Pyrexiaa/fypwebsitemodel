@@ -1,13 +1,13 @@
 import ast
 
+import numpy as np
 import pandas as pd
 import torch
 from catboost import CatBoostClassifier, CatBoostRegressor, Pool
-import numpy as np
 
+from utils.features import name_conversion
 from utils.model_architecture import FNNClassifierTri3
 from utils.model_paths import IMPUTATION_MODELS, NEURAL_NETWORK, SCALING_CSV
-from utils.features import name_conversion
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 PROBABILITY_THRESHOLD = 0.6
@@ -23,7 +23,7 @@ def impute(inputs: dict, feature: str, model_type: str) -> float:
             inputs["fl"],
             inputs["efw"],
             inputs["ga"],
-        ]
+        ],
     ]
 
     # Initialize model based on type
@@ -134,7 +134,9 @@ def binary_classification(inputs: dict, std_or_min: float, mean_or_max: float) -
             print("Feature not added: ", feature)
 
     # Identify features that were not added
-    not_added_features = [feature for feature in desired_feature_sequence if feature not in added_features]
+    not_added_features = [
+        feature for feature in desired_feature_sequence if feature not in added_features
+    ]
     print("Features not added to nn_input:", not_added_features)
 
     print("NN Input: ", len(nn_input))
@@ -150,7 +152,8 @@ def binary_classification(inputs: dict, std_or_min: float, mean_or_max: float) -
             mean_or_max_key = list(mean_or_max)[i - len(categorical_features)]
             std_or_min_key = list(std_or_min)[i - len(categorical_features)]
             scale_value = round(
-                ((col - mean_or_max[mean_or_max_key]) / std_or_min[std_or_min_key]), 4
+                ((col - mean_or_max[mean_or_max_key]) / std_or_min[std_or_min_key]),
+                4,
             )
         scaled_input.append(scale_value)
 

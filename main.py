@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
+from utils.features import name_conversion, value_mappings
 from utils.model_paths import (
     BINARY_FEATURES,
     IMPUTATION_MODELS,
@@ -13,7 +14,6 @@ from utils.utils import (
     impute,
     postprocess_imputed_data,
 )
-from utils.features import name_conversion, value_mappings
 
 app = Flask(__name__)
 CORS(app)
