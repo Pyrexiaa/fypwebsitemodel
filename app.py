@@ -91,3 +91,4 @@ def process_data() -> dict[str, str]:
     print("Results after binary classification: ", result.item())
     return jsonify(result.item())
 
+
