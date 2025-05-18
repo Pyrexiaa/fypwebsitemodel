@@ -7,8 +7,7 @@ import torch
 from catboost import CatBoostClassifier, CatBoostRegressor, Pool
 
 from features import name_conversion
-from model_architecture import FNNClassifierTri3
-from model_paths import IMPUTATION_MODELS, NEURAL_NETWORK, SCALING_CSV, LOGISTIC_REGRESSION
+from model_paths import IMPUTATION_MODELS, SCALING_CSV, LOGISTIC_REGRESSION
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 PROBABILITY_THRESHOLD = 0.6
@@ -160,23 +159,9 @@ def binary_classification(inputs: dict, std_or_min: float, mean_or_max: float) -
             )
         scaled_input.append(scale_value)
 
+    print("Predicting with Logistic Regression")
     scaled_input = np.array(scaled_input).reshape(1, -1)
     with open(LOGISTIC_REGRESSION, "rb") as file:
         model = pickle.load(file)
     out = model.predict(scaled_input)
     return out
-
-    # input_size = len(nn_input)
-    # net = FNNClassifierTri3(input_size, 0.20, 4)
-    # net.load_state_dict(torch.load(NEURAL_NETWORK, map_location=torch.device("cpu")))
-    # net.to(DEVICE)
-
-    # # Predict the value
-    # scaled_input_tensor = torch.tensor(scaled_input, dtype=torch.float32, device=DEVICE)
-    # net.eval()
-    # out = net(scaled_input_tensor)
-    # return torch.where(
-    #     out.data.sigmoid() > PROBABILITY_THRESHOLD,
-    #     torch.tensor(1, device=DEVICE),
-    #     torch.tensor(0, device=DEVICE),
-    # )
