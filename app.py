@@ -27,7 +27,6 @@ def hello() -> dict[str, str]:
 @app.route("/impute", methods=["POST"])
 def impute_data() -> dict[str, str]:
     data = request.json
-    print("Received data: ", data)
     # Convert keys
     converted_data = {}
     for k, v in data.items():
@@ -45,7 +44,6 @@ def impute_data() -> dict[str, str]:
             continue
         converted_data[k] = float(converted_data[k])
 
-    print("Data after key conversion:", converted_data)
 
     # If certain data is unavailable, impute it
     for feature, _ in IMPUTATION_MODELS.items():
@@ -67,7 +65,6 @@ def impute_data() -> dict[str, str]:
 @app.route("/process", methods=["POST"])
 def process_data() -> dict[str, str]:
     data = request.json
-    print("Received data: ", data)
     # Convert keys
     converted_data = {}
     for k, v in data.items():
@@ -79,7 +76,6 @@ def process_data() -> dict[str, str]:
     # Manually add smoking and diabetes_1 as 0
     converted_data["smoking"] = 0
     converted_data["diabetes_1"] = 0
-    print("Converted Data before binary classification: ", converted_data)
 
     # After imputing, get scale values
     std_and_mean = get_scale_values()
@@ -88,7 +84,6 @@ def process_data() -> dict[str, str]:
 
     # Scale it and classify it
     result = binary_classification(converted_data, std, mean)
-    print("Results after binary classification: ", result.item())
     return jsonify(result.item())
 
 if __name__ == "__main__":
