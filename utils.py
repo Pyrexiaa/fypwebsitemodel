@@ -45,7 +45,6 @@ def impute(inputs: dict, feature: str, model_type: str) -> float:
     model.load_model(model_path)
 
     # Use Pool to handle categorical features
-    print("Input Features for catboost: ", input_features)
     pool = Pool(data=input_features, cat_features=[1])
     prediction = model.predict(pool, verbose=False)
     return prediction[0]
@@ -85,11 +84,12 @@ def binary_classification(inputs: dict, std_or_min: float, mean_or_max: float) -
         "gender",
         "placenta_site",
         "af",
-        "hypertension_0",
-        "hypertension_1",
         "diabetes_0",
         "diabetes_1",
         "smoking",
+        "last_preg_sga",
+        "lat_preg_fgr",
+        "last_preg_normal",
         "prev_failed_preg",
         "high_risk_pe",
         "ga",
@@ -97,7 +97,6 @@ def binary_classification(inputs: dict, std_or_min: float, mean_or_max: float) -
         "hc",
         "ac",
         "fl",
-        "afi",
         "ute_ari",
         "ute_api",
         "m_age",
@@ -113,11 +112,12 @@ def binary_classification(inputs: dict, std_or_min: float, mean_or_max: float) -
         "gender",
         "placenta_site",
         "af",
-        "hypertension_0",
-        "hypertension_1",
         "diabetes_0",
         "diabetes_1",
         "smoking",
+        "last_preg_sga",
+        "lat_preg_fgr",
+        "last_preg_normal",
         "prev_failed_preg",
         "high_risk_pe",
     ]
